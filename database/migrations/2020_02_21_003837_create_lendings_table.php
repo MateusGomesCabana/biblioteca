@@ -13,11 +13,12 @@ class CreateLendingsTable extends Migration
      */
     public function up()
     {
+        
         Schema::create('lendings', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->date('data_start');
-            $table->date('data_end');
-            $table->date('data_finish');
+            $table->date('date_start');
+            $table->date('date_end');
+            $table->date('date_finish')->nullable();
             $table->timestamps();
             $table->integer('user_id')->unsigned();
         });

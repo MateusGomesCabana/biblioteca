@@ -14,14 +14,14 @@ class CreateBooksLendingsTable extends Migration
     public function up()
     {
         Schema::create('books_lendings', function (Blueprint $table) {
-            $table->integer('lending_id')->unsigned();
-            $table->integer('book_id')->unsigned();
+            $table->integer('lendings_id')->unsigned();
+            $table->integer('books_id')->unsigned();
             $table->timestamps();
         });
 
         Schema::table('books_lendings', function(Blueprint $table){
-            $table->foreign('lending_id')->references('id')->on('lendings');
-            $table->foreign('book_id')->references('id')->on('books');
+            $table->foreign('lendings_id')->references('id')->on('lendings');
+            $table->foreign('books_id')->references('id')->on('books');
         });
     }
 

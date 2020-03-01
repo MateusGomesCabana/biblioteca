@@ -6,11 +6,14 @@
         <div class="col-md-12">
             <div class="panel panel-default">
             	<ol class="breadcrumb panel-heading">
-                	<li><a href="">Livros</a></li>
+                	<li><a href="{{route('book.index')}}">Livros</a></li>
                 	<li class="active">Adicionar</li>
                 </ol>
                 <div class="panel-body">
-	                <form  method="POST" enctype="multipart/form-data">
+                    @if(Session::has('jsAlert'))
+                        <li class="active">Erro informações invalidas por favor complete todos os campos </li>
+                    @endif
+	                <form action="{{ route('book.save') }}" method="POST" enctype="multipart/form-data">
 	                	{{ csrf_field() }}
 						<div class="form-group">
 						  	<label for="name">Nome</label>
@@ -18,10 +21,10 @@
 						</div>
                         <div class="form-group">
                             <label for="name">Autores</label>
-                            <select name="category[]" class="form-control selectpicker" multiple="" data-live-search="true" title="Categorias">
-                                <!-- foreach() -->
-                                <option value=""></option>
-                                <!-- endforeach() -->
+                            <select name="category[]" class="form-control selectpicker" multiple="" data-live-search="true" title="Autores">
+                                @foreach($authors as $author)
+                                <option value="{{ $author->id }}">{{ $author->name }}</option>
+                                @endforeach()
                             </select>
                             <p class="help-block">Use Crtl para selecionar.</p>
                         </div>

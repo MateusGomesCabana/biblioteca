@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class lendings extends Model
 {
-    protected $fillable = ['date_start', 'date_end','date_finish'];
+    protected $fillable = ['date_start', 'date_end','date_finish','user_id'];
 
     /**
      * Get the post that owns the comment.

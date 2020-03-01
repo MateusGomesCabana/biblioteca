@@ -6,30 +6,30 @@
         <div class="col-md-12">
             <div class="panel panel-default">
             	<ol class="breadcrumb panel-heading">
-                	<li><a href="">Produtos</a></li>
+                	<li><a href="{{route('book.index')}}">Livros</a></li>
                 	<li class="active">Editar</li>
                 </ol>
                 <div class="panel-body">
-	                <form action="" method="POST" enctype="multipart/form-data">
+	                <form action="{{ route('book.update', $books->id) }}" method="POST" enctype="multipart/form-data">
 	                	{{ csrf_field() }}
 						<div class="form-group">
 						  	<label for="name">Nome</label>
-						    <input type="text" class="form-control" name="name" id="name" placeholder="Nome" value="">
+						    <input type="text" class="form-control" name="name" id="name" placeholder="Nome" value="{{ $books->title }}">
 						</div>
                         <div class="form-group">
                             <label for="name">Categorias</label>
                             <select name="category[]" class="form-control selectpicker" multiple="" data-live-search="true" title="Categorias">
-                                
-                                    <option value="" ></option>
-                                
+                            <?php foreach($authors as $author){ ?>
+                                    <option value="<?= $author->id ?>" <?= in_array($author->id, $selected_cat) ? "selected" : NULL ; ?>><?= $author->name ?></option>
+                            <?php } ?>
                             </select>
                             <p class="help-block">Use Crtl para selecionar.</p>
                         </div>
                         <div class="form-group">
                             <label for="name">Imagens</label>
                             
-                            <img src="/images/product/"  width="10%" />
-                            
+                            <img src="/images/product/{{ $images }}"  width="10%" />
+                           
                         </div>
                         <div class="control-group">
                             <button type="button" class="btn btn-info btn-xs" id="moreimages"><i class="glyphicon glyphicon-plus"></i></button>
@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-group">
                             <label for="description">Descrição</label>
-                            <textarea class="form-control" rows="3" name="description" id="description"></textarea>
+                            <textarea class="form-control" rows="3" name="description" id="description">{{ $books->description }}</textarea>
                         </div>
 						<br />
 						<button type="submit" class="btn btn-primary">Salvar</button>
